@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "accounts",
+    "core"
 ]
 
 MIDDLEWARE = [
@@ -125,4 +127,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 LOGIN_REDIRECT_URL = reverse_lazy("home")
-LOGOUT_REDIRECT_URL = reverse_lazy("home2")
+LOGOUT_REDIRECT_URL = reverse_lazy("home")
