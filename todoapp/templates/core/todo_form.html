@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% block body_content %}
-<p>CREATE TODO PAGE</p>
+
+<p>Update TODO PAGE</p>
 
 
 <form class="form-register" method="POST">
     {% csrf_token %}
     {{form}}
     <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create New ToDo
+        Update New ToDo
     </button>
 </form>
 {% endblock body_content %}

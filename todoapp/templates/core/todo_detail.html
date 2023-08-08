@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block body_content %}
+
+<p>TODo Details PAGE</p>
+
+<div>ID is: {{todo.id}}</div>
+<div>username is: {{todo.user.username}}</div>
+<div>start date is: {{todo.start_date}}</div>
+<div>end date is: {{todo.end_date}}</div>
+<div>title is: {{todo.title}}</div>
+<div>type is: {{todo.get_todo_type_display}}</div>
+<div>description is: {{todo.description}}</div>
+{% endblock body_content %}

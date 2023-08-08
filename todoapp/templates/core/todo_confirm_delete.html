@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body_content %}
+<p>TODO delete PAGE</p>
+<div class="center">
+    <form method="post" class="card">
+        {% csrf_token %}
+        <h2>Delete Todo</h2>
+        <p>Are you sure that you want to delete "{{ todo.id }}"?</p>
+        <p class="form-buttons">
+            <input type="submit" class="btn btn-primary" value="Delete" />
+            <a href="{% url 'my_todos' %}" class="btn btn-outline">Cancel</a>
+        </p>
+    </form>
+</div>
+{% endblock body_content %}
