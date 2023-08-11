@@ -1,3 +1,4 @@
+from typing import Iterable, Optional
 from django.db import models
 from django.contrib.auth import get_user_model
 # Create your models here.
@@ -19,6 +20,7 @@ class ToDo(models.Model):
     description = models.TextField()
     todo_type = models.CharField(choices=TODO_TYPES, default="2", max_length=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    active = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"{self.title}"

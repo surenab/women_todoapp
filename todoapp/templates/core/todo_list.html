@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block body_content %}
+{% load pagination_tags %}
 <p>TODO LIST PAGE</p>
+<a href="http://127.0.0.1:8000/my-todos?todo_type=2">Only Regular</a>
+<form action="" method="get">
+    {{ filter.form }}
+    <input type="submit" />
+</form>
 <a type="button" class="btn btn-primary" href="{% url 'create_todo' %}">Create new ToDo</a>
 <table class="table">
     <thead>
@@ -39,7 +45,35 @@
         {% endfor %}
     </tbody>
 </table>
-{% if request.user.is_authenticated %}
-<a type="button" class="btn btn-primary" href="{% url 'create_todo' %}">Create new ToDo</a>
+
+
+{% if is_paginated %}
+<nav aria-label="Page navigation example" class="d-flex justify-content-center pt-3">
+    <ul class="pagination">
+        {% if page_obj.has_previous and page_obj.number != 2 %}
+        <li class="page-item"><a class="page-link text-dark" href="?{% url_replace request 'page' 1 %}" tabindex="-1"
+                aria-disabled="true">First Page</a></li>
+        {% endif %}
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link text-dark"
+                href="?{% url_replace request 'page' page_obj.previous_page_number %}">
+                {{ page_obj.previous_page_number}}
+            </a></li>
+        {% endif %}
+        <li class="page-item disabled"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link text-dark"
+                href="?{% url_replace request 'page' page_obj.next_page_number %}">
+                {{ page_obj.next_page_number }}
+            </a>
+        </li>
+        {% endif %}
+        {% if page_obj.paginator.num_pages != page_obj.number %}
+        <li class="page-item"><a class="page-link text-dark"
+                href="?{% url_replace request 'page' page_obj.paginator.num_pages %}">Last Page</a></li>
+        {% endif %}
+    </ul>
+</nav>
 {% endif %}
+
 {% endblock body_content %}
