@@ -1,6 +1,6 @@
 from typing import Any
 from django import forms
-from .models import ToDo
+from .models import ToDo, ToDoComment
 
 
 class ToDoForm(forms.ModelForm):
@@ -17,3 +17,11 @@ class ToDoForm(forms.ModelForm):
     class Meta:
         model = ToDo
         fields = ["start_date", "end_date", "title", "description", "todo_type"]
+
+
+class ToDoCommentForm(forms.ModelForm):
+    text = forms.Textarea()
+
+    class Meta:
+        model = ToDoComment
+        fields = ["text", "todo"]

@@ -1,4 +1,3 @@
-from typing import Iterable, Optional
 from django.db import models
 from django.contrib.auth import get_user_model
 # Create your models here.
@@ -24,3 +23,12 @@ class ToDo(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title}"
+
+
+class ToDoComment(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    todo = models.ForeignKey(ToDo, on_delete=models.CASCADE)
+    text = models.TextField(max_length=300)
+
+    def __str__(self) -> str:
+        return f"{self.owner.username} is commneted {self.text}"

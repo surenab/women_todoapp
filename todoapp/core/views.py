@@ -1,13 +1,16 @@
+from typing import Any, Dict
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import ToDo
+from django.http import HttpRequest, HttpResponse
+from .models import ToDo, ToDoComment
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-from .forms import ToDoForm
+from .forms import ToDoForm, ToDoCommentForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
 from .filters import ToDoFilter
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeDoneView
 # Create your views here.
 
 
@@ -37,6 +40,21 @@ class Home(FilterView):
     paginate_by = 2
 
 
+class CreatToDoComment(CreateView):
+    model = ToDoComment
+    form_class = ToDoCommentForm
+    success_text = "Created!"
+
+    def get_success_url(self) -> str:
+        return reverse_lazy("todo_details", kwargs={"pk": self.request.POST.get("todo")})
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+
+        messages.success(self.request, "ToDo Comment instance is created!")
+        return super().form_valid(form)
+
+
 class CreatToDo(ToDoBase, CreateView):
     template_name = "create_todo.html"
 
@@ -56,6 +74,17 @@ class MyToDo(ToDoBase, FilterView):
 
 class MyToDoDetail(ToDoBase, DetailView):
     pass
+
+
+class ToDoDetail(DetailView):
+    model = ToDo
+    context_object_name = "todo"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        data = super().get_context_data(**kwargs)
+        data["comment_form"] = ToDoCommentForm
+        data["comments"] = ToDoComment.objects.filter(todo=data["todo"])
+        return data
 
 
 class MyToDoUpdate(ToDoBase, UpdateView):

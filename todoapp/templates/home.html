@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block body_content %}
 {% load pagination_tags %}
+
 <p>HOME PAGE</p>
 <form action="" method="get">
     {{ filter.form }}
@@ -21,7 +22,7 @@
     <tbody>
         {% for todo in todos%}
         <tr>
-            <th scope="row">{{todo.id}}</th>
+            <th scope="row"><a href="{% url 'todo_details' todo.id %}">{{todo.id}}</a></th>
             <td>{{todo.user.username}}</td>
             <td>{{todo.start_date}}</td>
             <td>{{todo.end_date}}</td>
@@ -62,4 +63,5 @@
     </ul>
 </nav>
 {% endif %}
+
 {% endblock body_content %}
