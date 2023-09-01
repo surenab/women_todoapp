@@ -24,4 +24,4 @@ class ToDoCommentForm(forms.ModelForm):
 
     class Meta:
         model = ToDoComment
-        fields = ["text", "todo"]
+        fields = ["text"]

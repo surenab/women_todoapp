@@ -11,6 +11,7 @@ from django_filters.views import FilterView
 from .filters import ToDoFilter
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeDoneView
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -49,6 +50,10 @@ class CreatToDoComment(CreateView):
         return reverse_lazy("todo_details", kwargs={"pk": self.request.POST.get("todo")})
 
     def form_valid(self, form):
+        todo_id = self.request.POST.get("todo")
+        todo = get_object_or_404(ToDo, id=todo_id)
+
+        form.instance.todo = todo
         form.instance.owner = self.request.user
 
         messages.success(self.request, "ToDo Comment instance is created!")
