@@ -23,7 +23,7 @@ class ToDo(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     title = models.CharField(max_length=60)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     todo_type = models.CharField(choices=TODO_TYPES, default="2", max_length=1)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=False)
@@ -31,7 +31,7 @@ class ToDo(models.Model):
     tags = models.ManyToManyField(Tag)
 
     def __str__(self) -> str:
-        return f"{self.title}"
+        return f"{self.title} {self.description}"
 
 
 class ToDoComment(models.Model):

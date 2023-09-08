@@ -1,4 +1,4 @@
-from django_filters import FilterSet, DateFilter, NumberFilter
+from django_filters import FilterSet, DateFilter, NumberFilter, CharFilter
 from django import forms
 from .models import ToDo
 
