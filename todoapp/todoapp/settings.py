@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from django.urls import reverse_lazy
 from django.contrib.messages import constants
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +44,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "accounts",
-    "core"
+    "core",
+    "anotherapp",
 ]
 
 MIDDLEWARE = [
@@ -139,3 +144,5 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
     constants.DEBUG: 'alert-light',
 }
+
+EMAIL_PASWORD = str(os.getenv('GMAIL_PASSWORD'))
