@@ -34,6 +34,12 @@ class ToDo(models.Model):
         return f"{self.title} {self.description}"
 
 
+class ToDoViews(models.Model):
+    todo = models.ForeignKey(ToDo, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    datetime = models.DateTimeField()
+
+
 class ToDoComment(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     todo = models.ForeignKey(ToDo, on_delete=models.CASCADE)

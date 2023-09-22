@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import Home, CreatToDo, MyToDo, MyToDoDetail, MyToDoUpdate, MyToDoDelete, CreatToDoComment, ToDoDetail
+from .views import TodoListApiView, TodoDetailApiView, Home, CreatToDo, MyToDo, MyToDoDetail, MyToDoUpdate, MyToDoDelete, CreatToDoComment, ToDoDetail
 
 urlpatterns = [
     path("", Home.as_view(), name="home"),
@@ -10,4 +10,6 @@ urlpatterns = [
     path("my-todos/delete/<int:pk>", MyToDoDelete.as_view(), name="my_todo_delete"),
     path("create-todo", CreatToDo.as_view(), name="create_todo"),
     path("create-comment", CreatToDoComment.as_view(), name="create_comment"),
+    path('api/', TodoListApiView.as_view()),
+    path('api/<int:pk>', TodoDetailApiView.as_view()),
 ]

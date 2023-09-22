@@ -1,3 +1,9 @@
+from .serializers import TodoSerializer
+from rest_framework import permissions
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from typing import Any, Dict
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
@@ -98,3 +104,13 @@ class MyToDoUpdate(ToDoBase, UpdateView):
 
 class MyToDoDelete(ToDoBase, DeleteView):
     success_text = "ToDo instance is deleted!"
+
+
+class TodoListApiView(ListCreateAPIView):
+    queryset = ToDo.objects.all()
+    serializer_class = TodoSerializer
+
+
+class TodoDetailApiView(RetrieveAPIView):
+    queryset = ToDo.objects.all()
+    serializer_class = TodoSerializer

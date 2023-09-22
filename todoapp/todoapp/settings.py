@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework',
     "accounts",
     "core",
     "anotherapp",
@@ -146,3 +147,8 @@ MESSAGE_TAGS = {
 }
 
 EMAIL_PASWORD = str(os.getenv('GMAIL_PASSWORD'))
+
+
+# .errolist  {
+#   list-style-type: none;
+# }
